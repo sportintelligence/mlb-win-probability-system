@@ -30,3 +30,4 @@ This system uses the MLB Stats API to collect game information and visualizes pr
 ## Notes
 
 The system was trained using 2025 MLB regular-season data. API responses may vary depending on MLB Stats API availability and schedule status.
+Web demo: https://sportintelligence.github.io/mlb-win-probability-system/
