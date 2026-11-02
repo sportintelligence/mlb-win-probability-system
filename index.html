@@ -1,11 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚾ MLB 실시간 승리 예측 대시보드</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="2025 MLB 경기 전 승률과 이닝별 승률 변화를 살펴보는 야구 데이터 대시보드."><meta name="theme-color" content="#142548"><title>Sport Intelligence · MLB 승률 대시보드</title><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script><style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 :root{
   --bg:#f5f5f2;
   --surface:#ffffff;
@@ -157,105 +151,45 @@ header h1 span{color:var(--accent);}
   .rcard-left{border-right:none;border-bottom:1px solid var(--border);}
   .container{padding:16px;}
   header{padding:0 16px;}
-}</style>
-</head>
-<body>
+}
+
+:root{--bg:#F3F6FB;--surface:#FDFDFF;--surface2:#F1F4FA;--border:#E2E6F0;--border2:#CDD3E0;--text:#1E2433;--text2:#505A74;--text3:#505A74;--accent:#1751D0;--accent-bg:#E8EEFB;--green:#187412;--sans:Inter,system-ui,-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace}
+body{background:var(--bg);color:var(--text);font-size:14px;word-break:keep-all}
+header{height:auto;min-height:82px;padding:18px max(24px,calc((100vw - 1260px)/2));background:rgba(253,253,255,.96);border-color:var(--border);backdrop-filter:blur(16px)}
+.brand{display:flex;gap:12px;align-items:center}.brand-mark{height:42px;width:42px;background:var(--text);color:white;display:grid;place-items:center;border-radius:13px;font-weight:800;font-size:21px;transform:rotate(-7deg)}
+header h1{font-size:17px;letter-spacing:-.7px}header h1 span{color:var(--accent)}.hm{font-family:var(--sans);font-size:12px;color:var(--text2);margin-top:3px}.hr{gap:12px}.as2{font-family:var(--sans);font-size:11px;border-radius:20px;padding:6px 10px}.al{font-family:var(--sans);font-size:11px;color:var(--text2)}
+.refresh-btn,.load-btn{border-radius:10px;padding:10px 15px;background:var(--accent);color:white;font-size:12px;font-weight:600}.refresh-btn:hover,.load-btn:hover{opacity:.9;transform:translateY(-1px)}
+.container{max-width:1308px;padding:28px 24px 48px}.hero{position:relative;overflow:hidden;background:#142548;color:#F7F9FC;border-radius:24px;padding:36px 38px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;gap:24px}.hero:after{content:'';position:absolute;right:-70px;top:-150px;width:450px;height:450px;border:1px solid #395275;border-radius:50%;pointer-events:none}.hero-copy{position:relative;z-index:1}.eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;color:#AEC8F5;margin-bottom:12px}.hero h2{font-size:clamp(25px,3vw,38px);line-height:1.3;font-weight:750;letter-spacing:-1.4px}.hero p{font-size:13px;color:#CDD3E0;margin-top:12px;line-height:1.9}.season-tag{white-space:nowrap;align-self:flex-start;background:#20385E;color:#DCE7FB;border:1px solid #48648E;border-radius:50px;padding:8px 14px;font-size:11px;font-weight:600;z-index:1}.hero-cta{display:inline-flex;align-items:center;gap:10px;margin-top:20px;color:#F7F9FC;font-size:12px;font-weight:650;background:#284571;padding:9px 14px;border-radius:9px;text-decoration:none}
+.control-bar{display:flex;align-items:end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:24px;padding:20px 22px;border:1px solid var(--border);border-radius:16px;background:var(--surface)}.date-control{display:flex;align-items:center;gap:8px}.field-label{display:block;font-size:11px;font-weight:650;color:var(--text2);margin-bottom:7px}.date-control input{font-family:var(--sans);font-weight:600;font-size:14px;background:var(--surface2);border:1px solid var(--border);border-radius:9px;padding:10px;color:var(--text);max-width:190px}.date-nav{width:36px;height:40px;background:var(--surface);border:1px solid var(--border);border-radius:9px;cursor:pointer;font-size:19px;color:var(--text2)}.control-help{font-size:12px;color:var(--text2)}
+.tabs{gap:5px;padding:4px;background:#E8EDF5;border-radius:12px;width:fit-content;margin-bottom:22px}.tab-btn{border:0;background:transparent;border-radius:9px;padding:10px 20px;color:var(--text2);font-size:12px}.tab-btn.active{background:var(--surface);color:var(--text);box-shadow:0 2px 5px #1e243310}.tab-btn:hover:not(.active){background:#DCE4EF}
+.mi{grid-template-columns:repeat(3,1fr);gap:14px}.ic{border-radius:16px;padding:18px 22px;display:flex;flex-direction:column;box-shadow:0 3px 15px #1e243303}.ic .l{order:-1;font-size:11px;letter-spacing:0;text-transform:none;margin:0 0 6px;color:var(--text2)}.ic .v{font-size:29px;letter-spacing:-1.5px;color:var(--text)}.ic .v small{font-family:var(--sans);font-size:11px;letter-spacing:0;color:var(--text2);margin-left:6px}
+.section-heading{display:flex;justify-content:space-between;align-items:center;margin:28px 0 14px;gap:12px}.section-heading h2{font-size:18px;letter-spacing:-.6px}.section-heading p{font-size:11px;color:var(--text2)}
+.gg{grid-template-columns:repeat(auto-fill,minmax(335px,1fr));gap:16px}.gc{padding:20px;border-radius:18px;border:1px solid var(--border);box-shadow:0 4px 16px #1e243304;transition:transform .18s,border-color .18s,box-shadow .18s;position:relative;overflow:hidden}.gc:hover{transform:translateY(-4px);border-color:#8FAEEA;box-shadow:0 12px 28px #14254812}.gc.selected{background:var(--surface);border-color:var(--accent);box-shadow:0 0 0 2px #1751d01a}.gh{margin-bottom:20px}.gid{font-family:var(--sans);font-size:10px;letter-spacing:.4px;color:var(--text2)}.sb{font-family:var(--sans);border-radius:20px;font-size:10px;padding:4px 9px}.sf{color:#187412}.mu{align-items:flex-start;gap:12px}.tm{min-width:0}.team-monogram{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;margin:0 auto 9px;background:#E8EEFB;border:1px solid #C2D3F4;font-size:13px;font-weight:800;color:var(--text)}.away .team-monogram{background:#FFF1E8;border-color:#F2D8C7}.side-label{font-size:9px;letter-spacing:1.5px;font-weight:700;color:var(--text2);margin-bottom:5px}.tn{font-size:12px;line-height:1.5;min-height:36px;font-weight:650}.pt{font-family:var(--sans);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text2)}.wp{font-size:27px;color:var(--text)!important;font-weight:700;margin:9px 0 7px;letter-spacing:-1.5px}.wp.unavailable{font-size:15px;letter-spacing:0;line-height:40px}.vs{font-size:10px;color:var(--text2);padding-top:62px}.sl2{margin:0 0 15px;padding:7px 10px;background:var(--surface2);border-radius:8px;font-size:11px;color:var(--text)}.pb{height:5px;border-radius:6px;background:#E2661E;display:flex;margin:14px 0 9px}.pf{background:#1751D0;border-radius:0;flex:none}.pb.empty{background:var(--border)}.pl{font-family:var(--sans);font-size:10px;text-align:left;color:var(--text2)}.card-bottom{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:13px;margin-top:16px;font-size:11px;color:var(--text2)}.card-bottom b{color:var(--accent);font-size:12px}
+.chart-panel{border-radius:20px;padding:26px;scroll-margin-top:110px;box-shadow:0 8px 28px #1e243306}.chart-panel h3{font-size:18px;letter-spacing:-.5px}.chart-panel .eyebrow{color:var(--text2);font-size:9px}.cp-m{font-family:var(--sans);font-size:12px;line-height:1.8;color:var(--text2);margin:7px 0 18px}.cw{height:320px;background:#FDFDFF;border-radius:12px}.chart-meta{margin-top:14px;font-size:11px;color:var(--text2);line-height:1.8}.chart-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--border);border-radius:12px;margin:18px 0;overflow:hidden}.chart-stat{padding:14px 18px;border-right:1px solid var(--border)}.chart-stat:last-child{border:0}.chart-stat span{display:block;font-size:10px;color:var(--text2)}.chart-stat strong{display:block;font-size:22px;letter-spacing:-.8px;margin-top:5px;font-variant-numeric:tabular-nums}.chart-message{padding:20px;border-radius:12px;background:var(--surface2);font-size:12px;color:var(--text2);margin:14px 0}
+.review-toolbar{border-radius:16px;padding:22px}.team-select{border-radius:9px;padding:10px 12px}.guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.guide-card{background:var(--surface);padding:26px;border:1px solid var(--border);border-radius:18px}.guide-card .step{font-size:11px;letter-spacing:1px;color:var(--text2);margin-bottom:20px}.guide-card h3{font-size:17px;letter-spacing:-.6px;margin-bottom:10px}.guide-card p{font-size:12px;line-height:1.95;color:var(--text2)}.service-note{padding:22px 0;color:var(--text2);font-size:12px;line-height:2}.service-note strong{color:var(--text)}.site-footer{border-top:1px solid var(--border);padding:25px 24px;color:var(--text2);font-size:11px;line-height:1.8}.footer-inner{max-width:1260px;margin:auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}.footer-brand{color:var(--text);font-weight:750;font-size:13px}.err{color:#9B2630;background:#FFF2F3;font-size:12px;border-radius:12px;border:1px solid #F0D2D5}.loading{padding:60px 20px;color:var(--text2)}button:focus-visible,a:focus-visible,.gc:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #1751D0;outline-offset:4px}
+@media(max-width:800px){.guide-grid{grid-template-columns:1fr}.hero{padding:27px}.hero h2{font-size:28px}.hr .al{display:none}header{padding:16px 20px}.hm{font-size:10px}.hero .season-tag{display:none}}
+@media(max-width:540px){header{align-items:center;gap:8px}.brand-mark{display:none}header h1{font-size:14px}.hr{gap:6px}.as2{font-size:9px;padding:5px 7px}.refresh-btn{font-size:10px;padding:8px 10px}.container{padding:18px 16px 32px}.hero{border-radius:18px;padding:25px 22px}.hero h2{font-size:25px}.hero p{font-size:12px}.control-bar{padding:16px}.control-help{font-size:11px}.mi{gap:8px}.ic{padding:14px}.ic .v{font-size:25px}.ic .l{font-size:10px}.tabs{width:100%}.tab-btn{flex:1;padding:10px 5px;font-size:11px}.gg{grid-template-columns:minmax(0,1fr)}.section-heading{align-items:flex-start;flex-direction:column;gap:5px}.chart-panel{padding:18px}.chart-panel h3{font-size:16px}.cw{height:270px}.chart-stat{padding:11px}.chart-stat strong{font-size:18px}.chart-stat span{font-size:9px}.chart-summary{margin:14px 0}.review-toolbar{padding:16px}.team-select{max-width:100%}.footer-inner{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.records-section{margin-top:28px;border-top:1px solid var(--border);padding-top:24px}.record-block{margin-top:22px}.record-block h4{font-size:14px;margin:0 0 12px;letter-spacing:-.3px}.record-sub{font-size:11px;color:var(--text2);margin:6px 0 12px;line-height:1.8}.records-table-wrap{overflow:auto;border:1px solid var(--border);border-radius:12px;margin-bottom:14px}.records-table{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums}.records-table caption{text-align:left;padding:13px 15px;font-weight:700;background:var(--surface2)}.records-table th,.records-table td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--border);color:var(--text)}.records-table th{font-weight:600;color:var(--text2);background:var(--surface2)}.records-table th:first-child,.records-table td:first-child{text-align:left;position:sticky;left:0;background:var(--surface);min-width:110px}.records-table tr:last-child td{border-bottom:0}.records-table .total-row td{font-weight:700;background:var(--surface2)}.record-teams{display:grid;grid-template-columns:1fr 1fr;gap:16px}.play-list{list-style:none;padding:0;max-height:520px;overflow:auto;border:1px solid var(--border);border-radius:12px}.play-list li{padding:13px 16px;border-bottom:1px solid var(--border);font-size:12px;line-height:1.8}.play-list li:last-child{border:0}.play-list li.scoring{border-left:3px solid var(--accent);background:var(--accent-bg)}.play-time{font-size:10px;font-weight:700;color:var(--text2);display:block}.play-filter{display:flex;gap:10px;align-items:center;margin-bottom:12px;font-size:12px;color:var(--text2)}.more-records{display:block;margin:20px auto;padding:11px 25px;border-radius:10px;background:var(--surface);border:1px solid var(--border);font-family:var(--sans);font-size:12px;font-weight:600;cursor:pointer}.history-meta{color:var(--text2);font-size:12px;padding:6px 0 16px}.record-status{background:var(--surface2);padding:14px;border-radius:10px;font-size:12px}.chart-data-toggle{margin-top:14px;font-size:12px}.chart-data-toggle summary{cursor:pointer;color:var(--text2);padding:8px 0}.record-decision{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.record-decision span{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-size:11px}@media(max-width:900px){.record-teams{grid-template-columns:1fr}}[hidden]{display:none!important}
+</style></head><body>
 <header>
-  <div>
-    <h1>⚾ MLB Win Probability <span>Predictor</span></h1>
-    <div class="hm" id="hm">Deep Learning-Based Real-Time Win Probability Prediction System · 2025 Season · 2,430 regular-season games; 1,633 training games</div>
-  </div>
-  <div class="hr">
-    <span class="as2 aload" id="apiSt">🔄 연결 중</span>
-    <span class="badge">Pre-game team8 · 56.95% Acc</span>
-    <span class="badge">In-game DNN · 76.35% Acc · AUC 0.8565</span>
-    <button class="refresh-btn" onclick="loadAll()">🔄 Refresh</button>
-    <span class="al" id="al">Auto-refresh: 30s</span>
-  </div>
+ <div class="brand"><div class="brand-mark" aria-hidden="true">S</div><div><h1>SPORT INTELLIGENCE <span>/ MLB</span></h1><div class="hm" id="hm">경기 흐름을 읽는 새로운 시선</div></div></div>
+ <div class="hr"><span class="as2 aload" id="apiSt" role="status">연결 중</span><button type="button" class="refresh-btn" onclick="loadAll()">새로고침 ↻</button><span class="al" id="al">30초마다 갱신</span></div>
 </header>
-
-<div class="container">
- <div style="padding:14px;background:#fff7ed;border:1px solid #fed7aa;margin-bottom:14px;line-height:1.7">
- <b>Revision 검증판 — 학습 재실행 없이 새 모델 반영</b><br>
- <label>조회일 <input id="revisionDate" type="date" value="2025-09-01" onchange="loadAll()"></label>
- <label>Pre-game 구성 <select id="modelView" onchange="updateRevisionView();loadAll()"><option value="team8">팀 지표 8개</option><option value="starter14">실제 선발 포함 14개 (사후 확인 조건부)</option></select></label><br>
- Pre-game은 저장된 2025 경기 입력만 사용. 미확보 경기는 예측 불가 표시. 표시값은 연구용이며 당시 공개 수신 시각의 재현이 아님.<br>
- In-game 그래프는 이닝당 1개 예측값 표시. seed 42·보정 전 모델 유지. 경기 종료 직전·도중 종료로 유효한 이닝 종료 입력이 없는 구간은 생략. API 연결과 외부 Chart.js 로딩 필요.
- </div>
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('today',this)">📅 선택일 경기</button>
-    <button class="tab-btn" onclick="switchTab('review',this)">🔍 팀별 최근 5경기</button>
-    <button class="tab-btn" onclick="switchTab('model',this)">🤖 모델 정보</button>
-  </div>
-
-  <!-- 선택일 경기 -->
-  <div id="tab-today" class="tab-content active">
-    <div class="mi">
-      <div class="ic"><div class="v" id="si-g">-</div><div class="l">선택일 경기</div></div>
-      <div class="ic"><div class="v" id="si-l">-</div><div class="l">진행 중</div></div>
-      <div class="ic"><div class="v" id="si-f">-</div><div class="l">종료</div></div>
-      <div class="ic"><div class="v" data-pre-accuracy>56.95%</div><div class="l">Pre-game 정확도</div></div>
-      <div class="ic"><div class="v">76.35%</div><div class="l">In-game 정확도</div></div>
-    </div>
-    <div class="chart-panel" id="chartPanel">
-      <h3 id="chartTitle">이닝별 승률 변화</h3>
-      <div class="cp-m" id="chartDesc"></div>
-      <div class="cw"><canvas id="inningChart"></canvas></div>
-    </div>
-    <div id="gamesContainer"><div class="loading"><div class="spinner"></div>MLB Stats API에서 데이터를 불러오는 중...</div></div>
-  </div>
-
-  <!-- 팀별 최근 5경기 리뷰 -->
-  <div id="tab-review" class="tab-content">
-    <div class="review-toolbar">
-      <label>🏟️ 팀 선택</label>
-      <select class="team-select" id="teamSelect">
-        <option value="">-- 팀을 선택하세요 --</option>
-      </select>
-      <button class="load-btn" onclick="loadTeamReview()">📊 최근 5경기 조회</button>
-    </div>
-    <div id="reviewContainer">
-      <div style="text-align:center;padding:40px;color:#4a6a8a;font-size:0.85rem">
-        ☝️ 위에서 팀을 선택하고 조회 버튼을 누르세요
-      </div>
-    </div>
-  </div>
-
-  <!-- 모델 정보 -->
-  <div id="tab-model" class="tab-content">
-    <div class="mtg">
-      <div class="model-card">
-        <h3>🧠 DNN 아키텍처</h3>
-        <table style="width:100%;border-collapse:collapse;font-size:0.78rem">
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px;color:var(--text3)">모델 유형</td><td style="padding:6px;color:var(--text2)">DNN (Deep Neural Network)</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px;color:var(--text3)">레이어 구조</td><td style="padding:6px;color:var(--text2)">Pre-game: 팀 8→32→16→1 / 선발 포함 14→64→32→1 / In-game: Input(8)→64→32→16→1</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px;color:var(--text3)">활성화함수</td><td style="padding:6px;color:var(--text2)">ReLU / Sigmoid</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px;color:var(--text3)">학습 데이터</td><td style="padding:6px;color:var(--text2)">2025 정규시즌 2,430경기 중 학습 1,633경기 · 9월 평가 374경기</td></tr>
-          <tr style="border-bottom:1px solid var(--border)"><td style="padding:6px;color:var(--text3)">Pre-game 정확도</td><td style="padding:6px;color:#68d391" data-pre-accuracy>56.95%</td></tr>
-          <tr><td style="padding:6px;color:var(--text3)">In-game 정확도</td><td style="padding:6px;color:#68d391">76.35% (AUC 0.856549)</td></tr>
-        </table>
-      </div>
-      <div class="model-card">
-        <h3>📊 Pre-game 입력: 팀 8개 / 실제 선발 포함 14개</h3><p>팀별 누적 승률·경기당 득점·실점·최근 폼 각 4개. 실제 선발 포함 구성은 ERA·WHIP·K/9 각 3개 추가. 결측은 학습 중앙값 대치.</p>
-      </div>
-      <div class="model-card" style="grid-column:1/-1">
-        <h3>📡 MLB Stats API 엔드포인트 (7개)</h3>
-        <div style="font-size:0.76rem;line-height:2;color:var(--text2)">
-          <p>• <b>스케줄</b> → <code style="background:var(--surface2);padding:1px 5px;border-radius:3px;font-family:var(--mono)">/api/v1/schedule?sportId=1&date=TODAY&hydrate=team,linescore,probablePitcher</code></p>
-          <p>• <b>스탠딩</b> → <code style="background:var(--surface2);padding:1px 5px;border-radius:3px;font-family:var(--mono)">/api/v1/standings?leagueId=103,104&season=YEAR</code></p>
-          <p>• <b>팀 통계</b> → <code style="background:var(--surface2);padding:1px 5px;border-radius:3px;font-family:var(--mono)">/api/v1/teams/{id}/stats?stats=season&group=hitting,pitching&season=YEAR</code></p>
-          <p>• <b>선수 통계</b> → <code style="background:var(--surface2);padding:1px 5px;border-radius:3px;font-family:var(--mono)">/api/v1/people/{id}/stats?stats=season&group=pitching&season=YEAR</code></p>
-          <p>• <b>박스스코어</b> → <code style="background:var(--surface2);padding:1px 5px;border-radius:3px;font-family:var(--mono)">/api/v1/game/{gamePk}/boxscore</code></p>
-          <p>• <b>라인스코어</b> → <code style="background:var(--surface2);padding:1px 5px;border-radius:3px;font-family:var(--mono)">/api/v1/game/{gamePk}/linescore</code></p>
-          <p>• <b>실시간 PBP</b> → <code style="background:var(--surface2);padding:1px 5px;border-radius:3px;font-family:var(--mono)">/api/v1.1/game/{gamePk}/feed/live</code></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
+<main class="container">
+ <section class="hero" aria-labelledby="heroTitle"><div class="hero-copy"><div class="eyebrow">THE GAME, IN PROBABILITIES</div><h2 id="heroTitle">스코어 너머의 흐름.<br>승률로 읽는 MLB.</h2><p>경기 전 전망부터 이닝별 변화까지.<br>관심 있는 경기를 선택하고 승리 가능성의 흐름을 확인하세요.</p><a class="hero-cta" href="#matchups">경기 살펴보기 <span aria-hidden="true">↘</span></a></div><span class="season-tag">2025 SEASON ARCHIVE</span></section>
+ <section class="control-bar" aria-label="경기 조회 조건"><div><label class="field-label" for="revisionDate">경기 날짜 · 미국 현지 일정 기준</label><div class="date-control"><button type="button" class="date-nav" aria-label="이전 날짜" onclick="shiftDate(-1)">‹</button><input id="revisionDate" type="date" min="2025-01-01" max="2025-12-31" value="2025-09-01" onchange="loadAll()"><button type="button" class="date-nav" aria-label="다음 날짜" onclick="shiftDate(1)">›</button></div></div><p class="control-help">2025 시즌 경기 조회 <span aria-hidden="true">·</span> 경기 카드를 누르면 승률 그래프가 열립니다.</p>
+ <select id="modelView" hidden aria-hidden="true"><option value="team8" selected>팀 기준</option></select></section>
+ <nav class="tabs" aria-label="대시보드 메뉴"><button type="button" class="tab-btn active" onclick="switchTab('today',this)">경기 센터</button><button type="button" class="tab-btn" onclick="switchTab('review',this)">팀별 경기 기록</button><button type="button" class="tab-btn" onclick="switchTab('model',this)">이용 안내</button></nav>
+ <section id="tab-today" class="tab-content active" aria-label="경기 센터">
+  <div class="mi"><div class="ic"><div class="v" id="si-g">—</div><div class="l">선택일 전체 경기</div></div><div class="ic"><div class="v" id="si-l">—</div><div class="l">진행 중</div></div><div class="ic"><div class="v" id="si-f">—</div><div class="l">종료</div></div></div>
+  <section class="chart-panel" id="chartPanel" aria-label="선택 경기 승률"><div class="eyebrow">WIN PROBABILITY TRACKER</div><h3 id="chartTitle">이닝별 승률 변화</h3><div class="cp-m" id="chartDesc"></div><div class="chart-summary" id="chartSummary"></div><div class="chart-message" id="chartMessage" hidden role="status"></div><div class="cw" id="chartWrap"><canvas id="inningChart" role="img" aria-label="선택 경기의 이닝별 홈팀 및 원정팀 승률 그래프"></canvas></div><div class="chart-meta" id="chartNote"></div><details class="chart-data-toggle" id="chartDataDetails" hidden><summary>승률 수치표 보기</summary><div id="chartDataTable"></div></details><section class="records-section" id="gameRecords" aria-label="선택 경기 상세 기록" aria-live="polite"></section></section>
+  <div class="section-heading" id="matchups"><h2>선택일 매치업</h2><p>각 카드의 확률은 경기 전 예측 승률입니다.</p></div><div id="gamesContainer" aria-live="polite"><div class="loading"><div class="spinner"></div>경기 정보를 불러오는 중입니다.</div></div>
+ </section>
+ <section id="tab-review" class="tab-content" aria-label="팀별 경기 기록"><div class="section-heading"><h2>팀의 최근 흐름</h2><p>선택한 날짜까지의 2025 시즌 경기 기록을 최신순으로 확인하세요.</p></div><div class="review-toolbar"><label for="teamSelect">팀 선택</label><select class="team-select" id="teamSelect"><option value="">팀을 선택하세요</option></select><button type="button" class="load-btn" onclick="loadTeamReview()">경기 기록 조회</button></div><div id="reviewContainer" aria-live="polite"><div class="loading">관심 있는 팀을 선택해 시즌 경기 기록을 확인하세요.</div></div></section>
+ <section id="tab-model" class="tab-content" aria-label="이용 안내"><div class="section-heading"><h2>데이터를 즐기는 세 가지 방법</h2></div><div class="guide-grid"><article class="guide-card"><div class="step">01 / BEFORE THE GAME</div><h3>경기 전 전망 확인</h3><p>양 팀의 누적 성적과 최근 경기 흐름을 반영한 경기 전 예측입니다. 카드에 홈팀과 원정팀의 확률이 함께 표시됩니다.</p></article><article class="guide-card"><div class="step">02 / FOLLOW THE FLOW</div><h3>이닝별 변화 탐색</h3><p>경기 카드를 선택하면 점수와 안타 등 경기 흐름을 반영한 이닝별 승률이 표시됩니다. 그래프에 마우스를 올리거나 터치해 값을 확인하세요.</p></article><article class="guide-card"><div class="step">03 / KNOW YOUR TEAM</div><h3>시즌 기록 돌아보기</h3><p>팀별 경기 기록에서 선택일까지의 시즌 경기 목록을 확인하고 이전 기록을 더 불러올 수 있습니다. 경기 카드를 선택하면 해당 경기의 승률 변화도 살펴볼 수 있습니다.</p></article></div><div class="service-note"><strong>서비스 안내</strong><br>현재 2025 정규시즌 경기를 제공합니다. 예측 자료가 없는 경기는 확률이 표시되지 않습니다.<br>확률은 경기 결과를 보장하지 않습니다. 그래프는 계산 가능한 이닝만 표시하며, 경기 종료 구간은 생략될 수 있습니다.<br>경기 정보: MLB Stats API · 인터넷 연결 필요</div></section>
+</main>
 <script>
 // ── 팀 목록 ───────────────────────────────────────
 const TEAMS = [
@@ -375,10 +309,11 @@ function selectedView(){return document.getElementById('modelView').value;}
 function dnnPredict(raw){return predictPregame(raw,PRE_MODELS[selectedView()]);}
 // ── MLB API ───────────────────────────────────────
 const BASE='https://statsapi.mlb.com';
+const apiRequests=new Map();
 async function fetchMLB(path){
-  const r=await fetch(BASE+path,{headers:{'Accept':'application/json'}});
-  if(!r.ok) throw new Error('HTTP '+r.status);
-  return r.json();
+ const now=Date.now(),cached=apiRequests.get(path);if(cached&&now-cached.time<30000)return cached.promise;
+ const promise=fetch(BASE+path,{headers:{Accept:'application/json'}}).then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}).catch(e=>{apiRequests.delete(path);throw e;});
+ apiRequests.set(path,{time:now,promise});if(apiRequests.size>150)apiRequests.delete(apiRequests.keys().next().value);return promise;
 }
 function today(){
   const selected=document.getElementById('revisionDate')?.value; if(selected)return selected;
@@ -518,21 +453,29 @@ function renderBoxStats(bs,isHomeWin){
 // ── 팀별 최근 5경기 리뷰 ──────────────────────────
 const reviewCharts={};
 
+let teamHistory=[],historyCount=0,historyRequest=0;
 async function loadTeamReview(){
- const teamId=Number(document.getElementById('teamSelect').value);
- const c=document.getElementById('reviewContainer');
+ const teamId=Number(document.getElementById('teamSelect').value),c=document.getElementById('reviewContainer');
  if(!teamId){c.textContent='팀을 선택하세요.';return;}
- c.textContent='선택일 이전 최근 경기 조회 중...';
+ const request=++historyRequest;c.innerHTML='<div class="loading"><div class="spinner"></div>시즌 경기 기록을 불러오는 중입니다.</div>';
  try{
-  const end=new Date(today()+'T00:00:00Z');end.setUTCDate(end.getUTCDate()-1);
-  const start=new Date(end);start.setUTCDate(start.getUTCDate()-40);
-  const d=await fetchMLB('/api/v1/schedule?sportId=1&teamId='+teamId+'&startDate='+start.toISOString().slice(0,10)+'&endDate='+end.toISOString().slice(0,10)+'&gameType=R&hydrate=team,linescore,probablePitcher');
-  const unique=new Map();for(const dd of d.dates||[])for(const g of dd.games||[])if(g.status?.abstractGameState==='Final')unique.set(g.gamePk,g);
-  const games=[...unique.values()].sort((a,b)=>b.gameDate.localeCompare(a.gameDate)).slice(0,5);
-  const feats=await Promise.all(games.map(g=>buildFeatures(g)));
-  for(const g of games)if(!gamesData.some(x=>x.gamePk===g.gamePk))gamesData.push(g);
-  c.innerHTML=games.length?'<p>선택일 이전 최근 완료 경기. 예측 불가 경기는 통계·난수로 대체하지 않음.</p><div class="gg">'+games.map((g,i)=>cardHtml(g,feats[i])).join('')+'</div>':'완료 경기 없음';
- }catch(e){c.textContent='조회 실패: '+e.message;}
+  const end=today();
+  const d=await fetchMLB('/api/v1/schedule?sportId=1&teamId='+teamId+'&startDate=2025-01-01&endDate='+end+'&gameType=R&hydrate=team,linescore,probablePitcher');
+  if(request!==historyRequest)return;
+  const unique=new Map();for(const dd of d.dates||[])for(const g of dd.games||[])unique.set(g.gamePk,g);
+  teamHistory=[...unique.values()].sort((a,b)=>(b.gameDate||'').localeCompare(a.gameDate||'')||b.gamePk-a.gamePk);historyCount=0;
+  for(const g of teamHistory)if(!gamesData.some(x=>x.gamePk===g.gamePk))gamesData.push(g);
+  c.innerHTML='<div class="history-meta" id="historyMeta"></div><div class="gg" id="historyCards"></div><button class="more-records" id="historyMore" onclick="appendHistory()">이전 경기 더 보기</button>';
+  await appendHistory();
+ }catch(e){if(request===historyRequest)c.textContent='경기 기록을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.';}
+}
+async function appendHistory(){
+ const request=historyRequest,btn=document.getElementById('historyMore');if(!btn)return;btn.disabled=true;
+ const next=teamHistory.slice(historyCount,historyCount+15),features=await Promise.all(next.map(g=>buildFeatures(g)));
+ if(request!==historyRequest)return;
+ document.getElementById('historyCards').insertAdjacentHTML('beforeend',next.map((g,i)=>cardHtml(g,features[i]).replace('id="card-','id="history-card-')).join(''));
+ historyCount+=next.length;document.getElementById('historyMeta').textContent='전체 '+teamHistory.length+'경기 · '+historyCount+'경기 표시 · '+today()+'까지';
+ btn.hidden=historyCount>=teamHistory.length;btn.disabled=false;
 }
 
 function renderBatterTable(bs){
@@ -570,72 +513,75 @@ function toggleDetail(i){
 // ── 선택일 경기 UI ──────────────────────────────────
 let chartInst=null, selPk=null, gamesData=[];
 
-function cardHtml(g,feats){
-  const hP=feats?Math.round(dnnPredict(feats)*1000)/10:null;
-  const aP=hP===null?null:Math.round((100-hP)*10)/10;
-  const st=g.status?.abstractGameState||'Preview';
-  const stM={Preview:'sp',Live:'sl',Final:'sf'};
-  const stL={Preview:'⏰ 예정',Live:'🔴 진행 중',Final:'✅ 종료'};
-  const hN=g.teams?.home?.team?.name||'Home', aN=g.teams?.away?.team?.name||'Away';
-  const hPit=g.teams?.home?.probablePitcher?.fullName||'TBD';
-  const aPit=g.teams?.away?.probablePitcher?.fullName||'TBD';
-  const pk=g.gamePk;
-  let sHtml='';
-  if(st==='Live'||st==='Final'){
-    sHtml=`<div class="sl2"><span>${aN.split(' ').pop()} ${g.teams?.away?.score??'-'} - ${g.teams?.home?.score??'-'} ${hN.split(' ').pop()} ${g.linescore?.currentInningOrdinal||''}</span></div>`;
-  }
-  return `<div class="gc" id="card-${pk}" onclick="selGame(${pk},${hP===null?'null':hP/100})">
-    <div class="gh"><span class="gid">Game #${pk}</span><span class="sb ${stM[st]||'sp'}">${stL[st]||st}</span></div>
-    ${sHtml}
-    <div class="mu">
-      <div class="tm"><div class="tn">${hN}</div><div class="pt">선발: ${hPit}</div><div class="wp ${hP>aP?'hi':'lo'}">${hP===null?'예측 불가':hP+'%'}</div></div>
-      <div class="vs">VS</div>
-      <div class="tm"><div class="tn">${aN}</div><div class="pt">선발: ${aPit}</div><div class="wp ${aP>hP?'hi':'lo'}">${aP===null?'예측 불가':aP+'%'}</div></div>
-    </div>
-    <div class="pb"><div class="pf" style="width:${hP===null?0:hP}%"></div></div>
-    <div class="pl">${hP===null?'경기 전 입력 미확보 — 임의 대체 없음':'Pre-game 홈 승률 '+hP+'% · '+selectedView()}</div>
-    <div class="fr"><span class="fc">${selectedView()==='team8'?8:14} 피처</span><span class="fc">DNN seed 42</span><span class="fc">경기 전 예측</span></div>
-  </div>`;
-}
 
-async function selGame(pk,base){
-  if(selPk) document.getElementById('card-'+selPk)?.classList.remove('selected');
-  selPk=pk; document.getElementById('card-'+pk)?.classList.add('selected');
-  const panel=document.getElementById('chartPanel');
-  panel.classList.add('active');
-  document.getElementById('chartTitle').textContent='이닝별 승률 변화 로딩 중...';
-  document.getElementById('chartDesc').textContent='';
-  panel.scrollIntoView({behavior:'smooth',block:'start'});
-  const g=gamesData.find(x=>x.gamePk===pk);
-  const hN=g?.teams?.home?.team?.name||'Home', aN=g?.teams?.away?.team?.name||'Away';
-  const {labels,data,real,error}=await fetchInningWP(pk,base);
-  document.getElementById('chartTitle').textContent=`이닝별 승률 변화 — ${hN} vs ${aN}`;
-  document.getElementById('chartDesc').textContent=`Game #${pk} | ${Number.isFinite(base)?'Pre-game '+Math.round(base*1000)/10+'%':'Pre-game 입력 미확보'} | ${error||'공개 feed 재구성 · 이닝 종료값만 표시 · 경기 종료 구간 제외'} | 보정·클리핑 없음`;
-  const ctx=document.getElementById('inningChart').getContext('2d');
-  if(chartInst) chartInst.destroy();
-  chartInst=new Chart(ctx,{
-    type:'line',
-    data:{labels,datasets:[
-      {label:hN+' 승률 (%)',data,borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,0.06)',fill:true,tension:0,pointBackgroundColor:'#1e90ff',pointRadius:5,pointHoverRadius:7},
-      {label:'50% 기준선',data:Array(labels.length).fill(50),borderColor:'rgba(100,116,139,0.45)',borderDash:[6,4],pointRadius:0,fill:false}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{labels:{color:'#a0a0a0',font:{size:11}}},tooltip:{callbacks:{label:c=>c.dataset.label==='50% 기준선'?null:' 홈팀 승률: '+c.parsed.y+'%'}}},
-      scales:{x:{ticks:{color:'#606060'},grid:{color:'rgba(0,0,0,0.06)'}},y:{min:0,max:100,ticks:{color:'#606060',callback:v=>v+'%'},grid:{color:'rgba(0,0,0,0.06)'}}}
-    }
-  });
+function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function shortName(id,name){return TEAMS.find(t=>t.id===id)?.short||name.split(' ').map(w=>w[0]).join('').slice(0,3).toUpperCase();}
+function cardHtml(g,feats){
+ const hP=feats?Math.round(dnnPredict(feats)*1000)/10:null,aP=hP===null?null:Math.round((100-hP)*10)/10;
+ const st=g.status?.abstractGameState||'Preview',pk=Number(g.gamePk);
+ const stM={Preview:'sp',Live:'sl',Final:'sf'},stL={Preview:'경기 예정',Live:'● 진행 중',Final:'경기 종료'};
+ const home=g.teams?.home,away=g.teams?.away;
+ const hN=home?.team?.name||'Home',aN=away?.team?.name||'Away';
+ const team=(side,name,pct,awaySide)=>`<div class="tm ${awaySide?'away':'home'}"><div class="side-label">${awaySide?'AWAY':'HOME'}</div><div class="team-monogram" aria-hidden="true">${escapeHtml(shortName(side?.team?.id,name))}</div><div class="tn">${escapeHtml(name)}</div><div class="pt" title="${escapeHtml(side?.probablePitcher?.fullName||'선발 미정')}">선발 ${escapeHtml(side?.probablePitcher?.fullName||'미정')}</div><div class="wp ${pct===null?'unavailable':''}">${pct===null?'자료 없음':pct.toFixed(1)+'%'}</div></div>`;
+ const scores=st==='Live'||st==='Final'?`<div class="sl2">최종${st==='Live'?' 대신 현재':''} 스코어 · ${escapeHtml(shortName(home?.team?.id,hN))} <strong>${home?.score??'—'} : ${away?.score??'—'}</strong> ${escapeHtml(shortName(away?.team?.id,aN))}</div>`.replace('최종 대신 현재','현재'):'';
+ return `<article class="gc" id="card-${pk}" tabindex="0" role="button" aria-label="${escapeHtml(hN+' 대 '+aN+' 승률 그래프 보기')}" onclick="selGame(${pk},${hP===null?'null':hP/100})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"><div class="gh"><span class="gid">${escapeHtml(g.officialDate||today())} · MATCHUP</span><span class="sb ${stM[st]||'sp'}">${escapeHtml(stL[st]||g.status?.detailedState||st)}</span></div>${scores}<div class="mu">${team(home,hN,hP,false)}<div class="vs">VS</div>${team(away,aN,aP,true)}</div><div class="pb ${hP===null?'empty':''}" aria-hidden="true"><div class="pf" style="width:${hP??0}%"></div></div><div class="pl">${hP===null?'이 경기의 경기 전 예측 자료가 없습니다.':'경기 전 예측 · 홈 '+hP.toFixed(1)+'% / 원정 '+aP.toFixed(1)+'%'}</div><div class="card-bottom"><span>이닝별 승률 흐름</span><b>그래프 보기 ↗</b></div></article>`;
 }
+let chartRequest=0;
+async function selGame(pk,base){
+ const request=++chartRequest;
+ if(selPk){document.getElementById('card-'+selPk)?.classList.remove('selected');document.getElementById('history-card-'+selPk)?.classList.remove('selected');}
+ selPk=pk;document.getElementById('card-'+pk)?.classList.add('selected');document.getElementById('history-card-'+pk)?.classList.add('selected');
+ switchTab('today',document.querySelector('.tab-btn'));
+ const panel=document.getElementById('chartPanel');panel.classList.add('active');
+ document.getElementById('chartTitle').textContent='승률 흐름을 불러오는 중입니다';
+ document.getElementById('chartDesc').textContent='';
+ document.getElementById('chartSummary').innerHTML='';
+ const message=document.getElementById('chartMessage'),wrap=document.getElementById('chartWrap');
+ message.hidden=true;wrap.hidden=true;document.getElementById('chartNote').textContent='';
+ document.getElementById('chartDataDetails').hidden=true;
+ document.getElementById('gameRecords').innerHTML='<div class="record-status">상세 경기 기록을 불러오는 중입니다.</div>';
+ loadGameRecords(pk,request);
+ if(chartInst){chartInst.destroy();chartInst=null;}
+ panel.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+ const g=gamesData.find(x=>x.gamePk===pk),hN=g?.teams?.home?.team?.name||'Home',aN=g?.teams?.away?.team?.name||'Away';
+ const {labels,data,error}=await fetchInningWP(pk,base);
+ if(request!==chartRequest)return;
+ document.getElementById('chartTitle').textContent=hN+' vs '+aN;
+ document.getElementById('chartDesc').textContent='이닝별 승률 변화 · 홈팀과 원정팀의 흐름을 비교하세요.';
+ const last=data.at(-1),lastLabel=labels.at(-1),max=data.length?Math.max(...data):null;
+ document.getElementById('chartSummary').innerHTML=[['경기 전 · 홈팀',Number.isFinite(base)?(base*100).toFixed(1)+'%':'자료 없음'],['마지막 표시 · '+(lastLabel||'—'),Number.isFinite(last)?last.toFixed(1)+'%':'자료 없음'],['표시 구간 최고 · 홈팀',Number.isFinite(max)?max.toFixed(1)+'%':'—']].map(([label,value])=>`<div class="chart-stat"><span>${escapeHtml(label)}</span><strong>${value}</strong></div>`).join('');
+ document.getElementById('chartNote').textContent='경기 전은 팀 성적 기반 예측, 이후는 경기 상황 기반 예측입니다. 계산 가능한 이닝만 표시하며 경기 종료 구간은 생략될 수 있습니다.';
+ if(error||data.length<2||typeof Chart==='undefined'){
+  message.hidden=false;message.textContent=typeof Chart==='undefined'?'그래프를 불러오지 못했습니다. 인터넷 연결을 확인한 뒤 새로고침해 주세요.':error?'이 경기의 이닝별 예측을 불러올 수 없습니다. 잠시 후 다시 시도해 주세요.':'아직 표시할 이닝별 예측 자료가 없습니다.';return;
+ }
+ wrap.hidden=false;
+ document.getElementById('chartDataDetails').hidden=false;
+ document.getElementById('chartDataTable').innerHTML=recordTable('이닝별 승률',['시점','홈팀 (%)','원정팀 (%)'],data.map((p,i)=>[labels[i],p.toFixed(1),(100-p).toFixed(1)]));
+ const ctx=document.getElementById('inningChart').getContext('2d');
+ chartInst=new Chart(ctx,{
+  type:'line',
+  data:{labels,datasets:[
+   {label:hN+' (홈)',data,borderColor:'#1751D0',backgroundColor:'rgba(23,81,208,0.055)',fill:'origin',borderWidth:2.5,tension:0,pointRadius:3.5,pointHoverRadius:6,pointBorderWidth:2,pointBackgroundColor:'#FDFDFF',pointBorderColor:'#1751D0'},
+   {label:aN+' (원정)',data:data.map(p=>Math.round((100-p)*10)/10),borderColor:'#E2661E',borderWidth:2,tension:0,pointRadius:3,pointHoverRadius:6,pointBackgroundColor:'#FDFDFF',pointBorderColor:'#E2661E',pointBorderWidth:2,fill:false},
+   {label:'50% 기준선',data:labels.map(()=>50),borderColor:'#CDD3E0',borderWidth:1,borderDash:[5,5],pointRadius:0,fill:false}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,animation:window.matchMedia('(prefers-reduced-motion: reduce)').matches?false:{duration:450},interaction:{mode:'index',intersect:false},layout:{padding:{top:12,right:8}},plugins:{legend:{position:'bottom',labels:{color:'#505A74',usePointStyle:true,pointStyle:'circle',boxWidth:8,boxHeight:8,padding:20,font:{size:11},filter:item=>item.datasetIndex<2}},tooltip:{backgroundColor:'#1E2433',titleColor:'#F7F9FC',bodyColor:'#F7F9FC',cornerRadius:10,padding:12,filter:item=>item.datasetIndex<2,callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toFixed(1)+'%'}}},scales:{x:{ticks:{color:'#505A74',font:{size:11},maxRotation:0},grid:{display:false},border:{display:false}},y:{min:0,max:100,ticks:{color:'#505A74',stepSize:25,callback:v=>v+'%',font:{size:10}},grid:{color:'#E2E6F0',lineWidth:.7},border:{display:false}}}}
+ });
+}
+function shiftDate(delta){const input=document.getElementById('revisionDate');const d=new Date((input.value||'2025-09-01')+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+delta);const next=d.toISOString().slice(0,10);if(next>=input.min&&next<=input.max){input.value=next;loadAll();}}
 
 async function loadAll(){
+  ++chartRequest;
   const cont=document.getElementById('gamesContainer');
+  selPk=null;
   document.getElementById('chartPanel').classList.remove('active');
   if(chartInst){chartInst.destroy();chartInst=null;}
   cont.innerHTML='<div class="loading"><div class="spinner"></div>MLB Stats API에서 선택일 경기 불러오는 중...</div>';
   document.getElementById('apiSt').className='as2 aload';
-  document.getElementById('apiSt').textContent='🔄 로딩 중';
+  document.getElementById('apiSt').textContent='조회 중';
   try{
     const t=today();
-    document.getElementById('hm').textContent=t+' | 2025 재구성 입력 기반 검증판 · 이후 시즌 일반화 미검증';
+    document.getElementById('hm').textContent=t+' · 2025 시즌 경기 센터';
     const [sched,standings]=await Promise.all([
       fetchMLB('/api/v1/schedule?sportId=1&date='+t+'&gameType=R&hydrate=team,linescore,probablePitcher'),
       getStandings()
@@ -643,7 +589,7 @@ async function loadAll(){
     const games=[];
     (sched.dates||[]).forEach(d=>(d.games||[]).forEach(g=>games.push(g)));
     gamesData=games;
-    document.getElementById('si-g').textContent=games.length||'-';
+    document.getElementById('si-g').textContent=games.length;
     document.getElementById('si-l').textContent=games.filter(g=>g.status?.abstractGameState==='Live').length;
     document.getElementById('si-f').textContent=games.filter(g=>g.status?.abstractGameState==='Final').length;
     if(!games.length){
@@ -653,10 +599,10 @@ async function loadAll(){
     }
     const fl=await Promise.all(games.map(g=>buildFeatures(g,standings)));
     cont.innerHTML='<div class="gg">'+games.map((g,i)=>cardHtml(g,fl[i])).join('')+'</div>';
-    document.getElementById('apiSt').className='as2 ao'; document.getElementById('apiSt').textContent='✅ API 응답 수신';
+    document.getElementById('apiSt').className='as2 ao'; document.getElementById('apiSt').textContent='● 연결됨';
   }catch(e){
     cont.innerHTML='<div class="err">⚠️ MLB Stats API 연결 실패: '+e.message+'<br><br>인터넷 연결 및 브라우저의 API 접근 허용 여부를 확인하세요.</div>';
-    document.getElementById('apiSt').className='as2 ae'; document.getElementById('apiSt').textContent='❌ 연결 실패';
+    document.getElementById('apiSt').className='as2 ae'; document.getElementById('apiSt').textContent='연결 확인 필요';
   }
 }
 
@@ -677,27 +623,61 @@ function switchTab(tab,el){
   });
 })();
 
-function updateRevisionView(){
- const text=selectedView()==='team8'?'56.95%':'55.61%';
- document.querySelectorAll('[data-pre-accuracy]').forEach(el=>el.textContent=text);
- document.querySelectorAll('.badge')[0].textContent='Pre-game '+selectedView()+' · '+text+' Acc';
+
+function recordTable(caption,headers,rows){
+ return '<div class="records-table-wrap"><table class="records-table"><caption>'+escapeHtml(caption)+'</caption><thead><tr>'+headers.map(x=>'<th scope="col">'+escapeHtml(x)+'</th>').join('')+'</tr></thead><tbody>'+rows.map(row=>'<tr>'+row.map((x,i)=>(i===0?'<th scope="row">':'<td>')+escapeHtml(x??'—')+(i===0?'</th>':'</td>')).join('')+'</tr>').join('')+'</tbody></table></div>';
 }
+function battingRecords(side,label){
+ if(!side)return '<p class="record-status">타자 기록이 없습니다.</p>';
+ const rows=(side.batters||[]).map(id=>side.players?.['ID'+id]).filter(p=>p?.stats?.batting&&Object.keys(p.stats.batting).length).map(p=>{const t=p.stats.batting;return [p.person?.fullName,p.position?.abbreviation,t.atBats,t.runs,t.hits,t.rbi,t.baseOnBalls,t.strikeOuts,t.homeRuns];});
+ const t=side.teamStats?.batting;if(t)rows.push(['팀 합계','',t.atBats,t.runs,t.hits,t.rbi,t.baseOnBalls,t.strikeOuts,t.homeRuns]);
+ return recordTable(label+' 타자 기록',['선수','수비','타수','득점','안타','타점','볼넷','삼진','홈런'],rows);
+}
+function pitchingRecords(side,label){
+ if(!side)return '<p class="record-status">투수 기록이 없습니다.</p>';
+ const rows=(side.pitchers||[]).map(id=>side.players?.['ID'+id]).filter(p=>p?.stats?.pitching&&Object.keys(p.stats.pitching).length).map(p=>{const t=p.stats.pitching;return [p.person?.fullName,t.inningsPitched,t.hits,t.runs,t.earnedRuns,t.baseOnBalls,t.strikeOuts,t.homeRuns,t.numberOfPitches??t.pitchesThrown];});
+ return recordTable(label+' 투수 기록',['선수','이닝','피안타','실점','자책','볼넷','삼진','피홈런','투구수'],rows);
+}
+const playRecords=new Map();
+function renderPlayRecords(pk){
+ const all=playRecords.get(pk)||[],scoringOnly=document.getElementById('scoringOnly-'+pk)?.checked;
+ const rows=all.filter(p=>p.about?.isComplete!==false&&(!scoringOnly||p.about?.isScoringPlay));
+ const target=document.getElementById('playList-'+pk);if(!target)return;
+ target.innerHTML=rows.length?rows.map(p=>{const a=p.about||{},r=p.result||{};const when=a.inning+'회 '+(a.isTopInning?'원정 공격':'홈 공격');return '<li class="'+(a.isScoringPlay?'scoring':'')+'"><span class="play-time">'+escapeHtml(when)+' · '+escapeHtml(r.event||'경기 상황')+' · 원정 '+escapeHtml(r.awayScore??'—')+' : 홈 '+escapeHtml(r.homeScore??'—')+'</span>'+escapeHtml(r.description||'설명 없음')+'</li>';}).join(''):'<li>표시할 경기 상황이 없습니다.</li>';
+}
+async function loadGameRecords(pk,request){
+ const result=await Promise.allSettled([
+  fetchMLB('/api/v1/game/'+pk+'/linescore'),fetchMLB('/api/v1/game/'+pk+'/boxscore'),fetchMLB('/api/v1.1/game/'+pk+'/feed/live')
+ ]);
+ if(request!==chartRequest)return;
+ const [ls,bs,feed]=result.map(r=>r.status==='fulfilled'?r.value:null),target=document.getElementById('gameRecords');
+ if(!ls&&!bs&&!feed){target.innerHTML='<h3>경기 기록</h3><p class="record-status">경기 기록을 불러오지 못했습니다. 새로고침 후 다시 선택해 주세요.</p>';return;}
+ const g=gamesData.find(g=>g.gamePk===pk),hName=bs?.teams?.home?.team?.name||g?.teams?.home?.team?.name||'홈팀',aName=bs?.teams?.away?.team?.name||g?.teams?.away?.team?.name||'원정팀';
+ let html='<h3>경기 기록</h3><p class="record-sub">'+escapeHtml(aName)+' (원정) · '+escapeHtml(hName)+' (홈)</p>';
+ if(ls?.innings){
+  const innings=ls.innings;
+  const row=(side,label)=>[label,...innings.map(i=>i[side]?.runs??'—'),ls.teams?.[side]?.runs,ls.teams?.[side]?.hits,ls.teams?.[side]?.errors];
+  html+='<div class="record-block">'+recordTable('이닝별 스코어',['팀',...innings.map(i=>i.num+'회'),'득점','안타','실책'],[row('away',aName),row('home',hName)])+'</div>';
+ }else html+='<p class="record-status">이닝별 스코어를 불러오지 못했습니다.</p>';
+ const decisions=feed?.liveData?.decisions;
+ if(decisions)html+='<div class="record-decision">'+[['승리투수',decisions.winner],['패전투수',decisions.loser],['세이브',decisions.save]].filter(x=>x[1]).map(([l,p])=>'<span>'+l+' · '+escapeHtml(p.fullName)+'</span>').join('')+'</div>';
+ if(bs?.teams){
+  const away=bs.teams.away,home=bs.teams.home;
+  const fields=[['득점','runs'],['안타','hits'],['홈런','homeRuns'],['볼넷','baseOnBalls'],['삼진','strikeOuts'],['잔루','leftOnBase'],['도루','stolenBases']];
+  html+='<div class="record-block">'+recordTable('팀 기록 비교',['기록',aName+' (원정)',hName+' (홈)'],fields.map(([l,k])=>[l,away?.teamStats?.batting?.[k],home?.teamStats?.batting?.[k]]))+'</div>';
+  html+='<div class="record-block"><h4>타자 기록</h4><div class="record-teams">'+battingRecords(away,aName)+battingRecords(home,hName)+'</div></div>';
+  html+='<div class="record-block"><h4>투수 기록</h4><div class="record-teams">'+pitchingRecords(away,aName)+pitchingRecords(home,hName)+'</div></div>';
+ }else html+='<p class="record-status">타자·투수 기록을 불러오지 못했습니다.</p>';
+ const plays=feed?.liveData?.plays?.allPlays;
+ if(Array.isArray(plays)){
+  playRecords.set(pk,plays);
+  html+='<div class="record-block"><h4>경기 상황 기록</h4><p class="record-sub">전체 타석 기록을 시간순으로 표시합니다. 상황 설명은 원문 영어로 제공됩니다.</p><label class="play-filter"><input type="checkbox" id="scoringOnly-'+pk+'" onchange="renderPlayRecords('+pk+')"> 득점 상황만 보기</label><ol class="play-list" id="playList-'+pk+'"></ol></div>';
+ }else html+='<p class="record-status">경기 상황 기록을 불러오지 못했습니다.</p>';
+ target.innerHTML=html;if(Array.isArray(plays))renderPlayRecords(pk);
+}
+
+function updateRevisionView(){} // Public interface uses the team-based pre-game model.
 let cd=30;
-setInterval(()=>{cd--;document.getElementById('al').textContent='갱신: '+cd+'s';if(cd<=0){cd=30;loadAll();}},1000);
+setInterval(()=>{if(document.hidden)return;cd--;document.getElementById('al').textContent=cd+'초 후 갱신';if(cd<=0){cd=30;if(!selPk)loadAll();}},1000);
 loadAll();
-</script>
-<footer style="border-top:1px solid var(--border);padding:20px 32px;margin-top:40px;">
-  <div style="max-width:1360px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-    <div>
-      <div style="font-size:0.78rem;font-weight:600;color:var(--text);margin-bottom:4px;">⚾ MLB Win Probability Dashboard</div>
-      <div style="font-size:0.64rem;color:var(--text3);font-family:var(--mono);">Deep Learning-Based Real-Time Win Probability Prediction System · 2025 Season · 2,430 regular-season games; 1,633 training games</div>
-    </div>
-    <div style="text-align:right;">
-      <div style="font-size:0.72rem;font-weight:500;color:var(--text2);">© 2025 Sport Data Science Lab</div>
-      <div style="font-size:0.66rem;color:var(--text3);margin-top:2px;">Division of Sport Studies, Myongji University</div>
-      <div style="font-size:0.62rem;color:var(--text3);margin-top:1px;font-family:var(--mono);">All rights reserved. For academic and research purposes only.</div>
-    </div>
-  </div>
-</footer>
-</body>
-</html>
+</script><footer class="site-footer"><div class="footer-inner"><div><div class="footer-brand">SPORT INTELLIGENCE / MLB</div><div>경기 정보와 승률을 한눈에.</div></div><div>2025 시즌 아카이브 · 경기 정보: MLB Stats API<br>예측 확률은 실제 결과를 보장하지 않습니다.</div></div></footer></body></html>
