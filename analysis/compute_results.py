@@ -1,9 +1,9 @@
-"""Re-aggregate KJSS-2026-0066 results from saved predictions (no model retraining).
+"""Re-aggregate model performance from saved predictions (no model retraining).
 
 - DNN: 10 seeds (Phase 2E per-seed predictions); report mean +/- SD of per-seed metrics,
   95% CI = game-cluster bootstrap of the seed-mean metric.
 - Comparison models: saved predictions (Phase 1E for 2025, Phase 2C for 2026).
-  In-game logistic regression is refit with equal per-game weights (as stated in Methods).
+  In-game logistic regression is refit with equal per-game weights.
 - Baselines: home-rate constant (training-set home win rate, game level),
   empirical win expectancy and leading-team rule (in-game).
 - External 2025->2026: frozen 2025 DNN (10 seeds), 2025-fit LR / home-rate / EWE / leading rule.
