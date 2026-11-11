@@ -1,33 +1,32 @@
 # Real-Time MLB Win Probability Prediction System
 
-This repository provides the HTML-based implementation of a real-time MLB win probability prediction dashboard developed for the study:
+Code and trained models for a browser-based MLB win probability dashboard that provides pre-game and in-game (half-inning) win probabilities from the MLB Stats API.
 
-"Design and Implementation of a Real-Time MLB Game Outcome Prediction System Using Deep Learning and the MLB Stats API"
-
-## Overview
-
-This system uses the MLB Stats API to collect game information and visualizes pre-game and in-game win probabilities. The trained DNN model weights are embedded in JSON format and inference is performed in the browser using JavaScript matrix operations.
-
-## Main Features
-
-- Pre-game win probability prediction
-- In-game win probability update by inning
-- MLB Stats API integration
-- Client-side DNN inference using JavaScript
-- No dedicated server required
-
-## Files
-
-- `index.html`: Main dashboard file
-- `dashboard_example.png`: Example screenshot of the implemented system
-
-## How to Use
-
-1. Download or clone this repository.
-2. Open `index.html` in a web browser.
-3. The dashboard will request data from the MLB Stats API and display win probability results.
-
-## Notes
-
-The system was trained using 2025 MLB regular-season data. API responses may vary depending on MLB Stats API availability and schedule status.
 Web demo: https://sportintelligence.github.io/mlb-win-probability-system/
+
+## Contents
+
+| Path | Contents |
+| --- | --- |
+| `index.html` | Dashboard. Trained DNN weights are embedded as JSON and inference runs in the browser (no server needed). |
+| `notebooks/` | Data collection, feature construction, model training and evaluation (Google Colab), run in numbered order |
+| `analysis/` | Scripts that summarize model performance, SHAP and calibration from the notebook outputs |
+| `models/` | Trained pre-game and in-game DNNs (`.keras`) and their JSON exports |
+
+## Models
+
+- Pre-game DNN: 22 inputs from team and starting-pitcher records dated before the game; Input(22) → 128 → 64 → 32 → 1.
+- In-game DNN: 8 game-state inputs at the start of each half-inning; Input(8) → 64 → 32 → 16 → 1.
+- The dashboard uses the models trained on the 2025 regular season (random seed 2026).
+
+## Usage
+
+Open `index.html` in a browser, or use the web demo. Results depend on MLB Stats API availability.
+
+## Data
+
+Game data come from the MLB Stats API (statsapi.mlb.com) and are subject to MLB Advanced Media's terms of use. They are used here for non-commercial academic research. Raw API data are not redistributed; the notebooks collect them directly.
+
+## License
+
+MIT License (see `LICENSE`).
